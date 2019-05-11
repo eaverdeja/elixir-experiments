@@ -1,0 +1,2 @@
+defmodule Gencounter do
+end
