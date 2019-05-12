@@ -1,0 +1,22 @@
+/* This file is for your main application css. */
+
+@import "../css/phoenix.css";
+
+.gutterBottom {
+  margin-bottom: 1rem;
+}
+
+.messageList {
+  height: 250px;
+  border: 1px solid black;
+  overflow-y: auto;
+  padding: 10px 0 0 10px;
+}
+
+.messageElement {
+  margin-bottom: .5rem;
+  
+  & > p {
+    margin-bottom: inherit;
+  }
+}
