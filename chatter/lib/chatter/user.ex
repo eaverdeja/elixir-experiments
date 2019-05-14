@@ -17,4 +17,22 @@ defmodule Chatter.User do
     |> validate_required([:email, :password])
     |> unique_constraint(:email)
   end
+
+  def reg_changeset(user, attrs) do
+    user
+    |> changeset(attrs)
+    |> cast(attrs, [:password], [])
+    |> validate_length(:password, min: 5)
+    |> hash_pw()
+  end
+
+  def hash_pw(changeset) do
+    case changeset do
+      %Ecto.Changeset{valid?: true, changes: %{password: p}} ->
+        put_change(changeset, :encrypt_pass, Bcrypt.hash_pwd_salt(p))
+
+      _ ->
+        changeset
+    end
+  end
 end
