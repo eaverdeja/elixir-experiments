@@ -1,12 +1,8 @@
+<h1>Sign In</h1>
+
 <div class="row">
   <div class="col-6">
     <%= form_for @changeset, @action, fn f -> %>
-      <%= if @changeset.action do %>
-      <div class="alert alert-danger">
-        <p>Oops, something went wrong! Check the errors below</p>
-      </div>
-      <% end %>
-
       <div class="form-group">
         <%= label f, :email %>
         <%= email_input f, :email, class: "form-control" %>
@@ -19,10 +15,7 @@
         <%= error_tag f, :password %>
       </div>
 
-      <%= submit "Submit", class: "btn btn-inline btn-primary" %>
-
-      <%= link "Back", to: @back_link,
-        class: "btn btn-outline-dark ml-2" %>
+      <%= submit "Submit", class: "btn btn-primary" %>
     <% end %>
   </div>
 </div>

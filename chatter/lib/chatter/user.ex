@@ -1,6 +1,8 @@
 defmodule Chatter.User do
   use Ecto.Schema
-  import Ecto.Changeset
+  import Ecto.{Changeset, Query}
+
+  alias Chatter.Repo
 
   schema "users" do
     field :email, :string
@@ -33,6 +35,23 @@ defmodule Chatter.User do
 
       _ ->
         changeset
+    end
+  end
+
+  def authenticate_user(email, plain_text_password) do
+    query = from u in __MODULE__, where: u.email == ^email
+
+    case Repo.one(query) do
+      nil ->
+        Bcrypt.no_user_verify()
+        {:error, :invalid_credentials}
+
+      user ->
+        if Bcrypt.verify_pass(plain_text_password, user.encrypt_pass) do
+          {:ok, user}
+        else
+          {:error, :invalid_credentials}
+        end
     end
   end
 end

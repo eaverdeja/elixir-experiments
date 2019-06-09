@@ -13,11 +13,9 @@
   <header>
     <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
       <a class="navbar-brand col-sm-2 col-md-1 mr-0" href="#"><h4>Chatter</h4></a>
-      <ul class="navbar-nav px-3">
-        <li class="nav-item text-nowrap">
-          <a class="nav-link" href="#"><p class="text-light">Sign out</p></a>
-        </li>
-      </ul>
+      <div class="col-sm-3 d-flex flex-row-reverse">
+        <%= render "logged.html", conn: @conn %>
+      </div>
     </nav>
   </header>
   <main role="main" class="container-fluid">
@@ -29,6 +27,7 @@
     <% end %>
     <%= render @view_module, @view_template, assigns %>
   </main>
+  <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/vendor.js") %>"></script>
   <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
 </body>
 

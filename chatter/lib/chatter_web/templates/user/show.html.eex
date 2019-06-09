@@ -1,10 +1,10 @@
 <h2>Show user</h2>
 
-<dl>
-  <li>
-    <strong>Email</strong>
-    <p><%= @user.email %></p>
-  </li>
-</dl>
+<div class="card mb-4" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title"><%= @user.email %></h5>
+  </div>
+</div>
 
-<%= link "Back", to: Routes.user_path(@conn, :index) %>
+<%= link "Back", to: Routes.user_path(@conn, :index),
+  class: "btn btn-outline-dark" %>

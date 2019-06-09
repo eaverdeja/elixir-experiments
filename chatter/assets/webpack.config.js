@@ -13,6 +13,7 @@ const VENDOR_LIBS = [
 ]
 
 module.exports = (env, options) => ({
+  devtool: 'source-map',
   optimization: {
     minimizer: [
       new UglifyJsPlugin({ cache: true, parallel: true, sourceMap: false }),
@@ -20,11 +21,12 @@ module.exports = (env, options) => ({
     ]
   },
   entry: {
-    './js/app.js': VENDOR_LIBS.concat(['./js/app.js']).concat(glob.sync('./vendor/**/*.js')),
+    './js/vendor.js': VENDOR_LIBS.concat(glob.sync('./vendor/**/*.js')),
+    './js/app.js': './js/app.js',
   },
   output: {
-    filename: 'js/[name].js',
-    path: path.resolve(__dirname, '../priv/static/js'),
+    filename: '[name]',
+    path: path.resolve(__dirname, '../priv/static'),
   },
   module: {
     rules: [

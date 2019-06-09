@@ -10,7 +10,16 @@ defmodule ChatterWeb.UserController do
 
   def show(conn, %{"id" => id}) do
     user = Repo.get(User, id)
-    render(conn, "show.html", user: user)
+
+    cond do
+      user == Guardian.Plug.current_resource(conn) ->
+        render(conn, "show.html", user: user)
+
+      :error ->
+        conn
+        |> put_flash(:error, "No access")
+        |> redirect(to: Routes.user_path(conn, :index))
+    end
   end
 
   def delete(conn, %{"id" => id}) do
@@ -34,7 +43,7 @@ defmodule ChatterWeb.UserController do
       {:ok, _user} ->
         conn
         |> put_flash(:info, "User created successfully!")
-        |> redirect(to: Routes.user_path(conn, :index))
+        |> redirect(to: Routes.session_path(conn, :new))
 
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)

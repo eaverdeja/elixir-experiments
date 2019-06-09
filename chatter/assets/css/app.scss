@@ -5,7 +5,7 @@
 @import "../node_modules/bootstrap/scss/bootstrap.scss";
 
 .container-fluid {
-  padding: 10px 0 20px 40px;
+  padding: 10px 40px 20px 40px;
 }
 
 /*
@@ -53,16 +53,8 @@
 }
 
 .messageList {
-  height: 250px;
+  height: 350px;
   border: 1px solid black;
   overflow-y: auto;
-  padding: 10px 0 0 10px;
-}
-
-.messageElement {
-  margin-bottom: .5rem;
-  
-  & > p {
-    margin-bottom: inherit;
-  }
+  padding: 10px;
 }

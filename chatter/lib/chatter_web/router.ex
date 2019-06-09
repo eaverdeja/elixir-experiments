@@ -7,6 +7,12 @@ defmodule ChatterWeb.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug ChatterWeb.Auth.Pipeline
+  end
+
+  pipeline :browser_auth do
+    plug ChatterWeb.Auth.Pipeline
+    plug Guardian.Plug.EnsureAuthenticated
   end
 
   pipeline :api do
@@ -15,10 +21,17 @@ defmodule ChatterWeb.Router do
 
   scope "/", ChatterWeb do
     pipe_through :browser
+    resources "/users", UserController, only: [:new, :create]
+    resources "/sessions", SessionController, only: [:create]
+    get "/", SessionController, :new
+    delete "/", SessionController, :logout
+  end
 
-    get "/", PageController, :index
+  scope "/", ChatterWeb do
+    pipe_through [:browser, :browser_auth]
 
-    resources "/users", UserController
+    resources "/users", UserController, except: [:new, :create]
+    get "/chat", PageController, :index
   end
 
   # Other scopes may use custom stacks.

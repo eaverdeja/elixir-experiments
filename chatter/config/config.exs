@@ -25,6 +25,11 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
+# Use Guardian for JWT authentication
+config :chatter, ChatterWeb.Auth.Guardian,
+  issuer: "chatter",
+  secret_key: "zo4G0KP5oP8uktoJ1MFvQK0rer6r+EBLkgq0tQuAQAQcJIwBhYChldTxwZXNiDwQ"
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"

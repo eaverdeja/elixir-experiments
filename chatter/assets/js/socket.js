@@ -9,8 +9,13 @@
 import {Socket} from "phoenix"
 export {Presence} from "phoenix"
 
-const user = document.getElementById('user').innerText
+const user = document.getElementById('user')
+ ? document.getElementById('user').innerText
+ : null
+
 export const socket = new Socket("/socket", {params: {user}})
+
+export const get_user = () => user
 
 // When you connect, you'll often need to authenticate the client.
 // For example, imagine you have an authentication plug, `MyAuth`,
@@ -54,5 +59,7 @@ export const socket = new Socket("/socket", {params: {user}})
 //     end
 //
 // Finally, connect to the socket:
-socket.connect()
+if(user) {
+    socket.connect()
+}
 
