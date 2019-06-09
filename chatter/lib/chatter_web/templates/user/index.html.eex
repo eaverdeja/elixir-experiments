@@ -1,6 +1,6 @@
 <h2>List of users</h2>
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>Email</th>
@@ -12,13 +12,16 @@
     <tr>
       <td><%= user.email %></td>
       <td>
-        <%= link "Show", to: Routes.user_path(@conn, :show, user), class: "button button-outline" %>
-        <%= link "Edit", to: Routes.user_path(@conn, :edit, user), class: "button button-outline" %>
-        <%= link "Delete", method: "delete", to: Routes.user_path(@conn, :delete, user), class: "button button-outline" %>
+        <%= link "Show", to: Routes.user_path(@conn, :show, user), class: "btn btn-outline-primary" %>
+        <%= link "Edit", to: Routes.user_path(@conn, :edit, user), class: "btn btn-outline-primary" %>
+        <%= link "Delete", method: "delete",
+          to: Routes.user_path(@conn, :delete, user),
+          data: [confirm: "Are you sure?"],
+          class: "btn btn-outline-danger" %>
       </td>
     </tr>
     <% end %>
   </tbody>
 </table>
 
-<%= link "Create a new user", to: Routes.user_path(@conn, :new), class: "button button-outline" %>
+<%= link "Create a new user", to: Routes.user_path(@conn, :new), class: "btn btn-outline-primary" %>

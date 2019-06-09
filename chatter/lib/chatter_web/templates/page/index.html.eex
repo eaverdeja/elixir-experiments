@@ -6,15 +6,15 @@
   </div>
 </div>
 <div class="row">
-  <div class="column">
+  <div class="col">
     <h3>Messages:</h3>
     <dl id="messageList" class="messageList"></dl>
-    <fieldset>
+    <div class="form-group">
       <label for="newMessage">New message</label>
-      <input type="text" id="newMessage">
-    </fieldset>
+      <input type="text" class="form-control" id="newMessage" placeholder="Type a message..">
+    </div>
   </div>
-  <div class="column column-30">
+  <div class="col">
     <h3>Users Online:</h3>
     <ul id="onlineUsers"></ul>
   </div>

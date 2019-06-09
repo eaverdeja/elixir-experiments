@@ -11,6 +11,8 @@ import "../css/app.scss"
 //
 import "phoenix_html"
 
+import "../node_modules/bootstrap/dist/js/bootstrap.min.js"
+
 // Import local files
 //
 // Local files can be imported directly using relative paths, for example:
