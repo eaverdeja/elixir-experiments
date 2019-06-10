@@ -49,7 +49,7 @@ if(get_user()) {
             presences = Presence.syncState(presences, state)
             render(presences)
         })
-    
+
     room.on("presence_diff", diff => {
             presences = Presence.syncDiff(presences, diff)
             render(presences)
@@ -84,6 +84,8 @@ if(get_user()) {
         messageList.appendChild(messageElement)
         messageList.scrollTop = messageList.scrollHeight
     }
+
+    room.on("message:all", ({ messages }) => Object.values(messages).map(renderMessage))
     
     room.on("message:new", renderMessage)
 }
